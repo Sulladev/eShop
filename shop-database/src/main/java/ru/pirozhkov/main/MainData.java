@@ -17,10 +17,10 @@ public class MainData {
         RoleRepository roleRepository = applicationContext.getBean("roleRepository", RoleRepository.class);
 
 
-        Role role1 = new Role("ROLE_USER");
-//        Role role2 = new Role("ROLE_ADMIN");
-//        Role role3 = new Role("ROLE_SUPER_ADMIN");
-//        Role role4 = new Role("ROLE_MANAGER");
+
+//        Role role1 = new Role("ROLE_ADMIN");
+//        Role role2 = new Role("ROLE_USER");
+//        Role role3 = new Role("ROLE_MANAGER");
 
 
 //        User user1 = new User("Ron","ron@gmail.com");
@@ -36,19 +36,19 @@ public class MainData {
 //        user2.getRoles().add(role4);
 
 
-          User user = new User("Tom", "tom@gmail.com");
-          user.setUsername("tom");
-          user.setPassword("11");
-          user.getRoles().add(role1);
-//
-//
-        roleRepository.save(role1);
+//          User user = new User("Tom", "tom@gmail.com");
+//          user.setUsername("tom");
+//          user.setPassword("11");
+//          user.getRoles().add(role1);
+////
+////
+//        roleRepository.save(role1);
 //        roleRepository.save(role2);
 //        roleRepository.save(role3);
-//        roleRepository.save(role4);
+
 
 //        userRepository.save(user1);
 //        userRepository.save(user2);
-        userRepository.save(user);
+//        userRepository.save(user);
     }
 }

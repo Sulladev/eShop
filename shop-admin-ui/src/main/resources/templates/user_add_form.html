@@ -1,10 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootadmin.min.css}">
+    <link rel="stylesheet" th:href="@{https://bootadmin.net/css/datatables.min.css}">
+
+    <title>User add form</title>
+
 </head>
+
 <body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <br>
+            <br>
+            <h2>Add a new user</h2>
+            <!--/*@thymesVar id="user" type="ru.pirozhkov.entities.User"*/-->
+            <form method="post" th:action="@{/users/add}" th:object="${userForm}">
+                <div class="form-group col-md-6">
+                    <label for="name">Name</label>
+                    <input class="form-control" name="name" type="text" id="name" th:field="*{name}">
+                    <p th:class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect
+                        name</p>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="username">Username</label>
+                    <input class="form-control" name="username" type="text" id="username" th:field="*{username}">
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input class="form-control" name="email" type="text" id="email" th:field="*{email}">
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="password">Password</label>
+                    <input class="form-control" name="password" type="text" id="password" th:field="*{password}">
+                </div>
+
+                <div th:each="role, stat :${roles}" class="form-check">
+                    <input
+                            th:field="*{roles}"
+                            th:value="${role.id}"
+                            th:id="${role.name}"
+                            type="checkbox"
+                            class="form-check-input"/>
+                    <label
+                            class="form-check-label"
+                            th:text="${role.name}"
+                            th:for="${role.name}"
+                    ></label>
+                </div>
+                <br>
+                <button class="btn btn-primary" type="submit">Add</button>
+                <a class="btn btn-primary" th:href="@{/users}">Back</a>
+            </form>
+            <br>
+            <div><a th:href="@{/}"><i class="fas fa-home fa-fw"></i> Home</a></div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/bootadmin.min.js}"></script>
+<script th:src="@{https://bootadmin.net/js/datatables.min.js}"></script>
 
 </body>
 </html>
+
+
+<!--<form method="POST" th:action="@{/admin/users/edit}" th:object="${user}">-->
+<!--    <input class="form-control" th:field="*{id}" type="hidden">-->
+<!--    <div class="form">-->
+<!--        <div class="row form-group">-->
+<!--            <label>Имя</label>-->
+<!--            <input class="form-control" placeholder="Название" th:field="*{name}" type="text">-->
+<!--        </div>-->
+<!--        <div class="row form-group">-->
+<!--            <label>Username</label>-->
+<!--            <input class="form-control" placeholder="Бренд" th:field="*{username}" type="text">-->
+<!--        </div>-->
+<!--        <div class="row form-group">-->
+<!--            <label>Адрес</label>-->
+<!--            <input class="form-control" placeholder="Цена" th:field="*{address}" type="text">-->
+<!--        </div>-->
+<!--        <div class="row form-group">-->
+<!--            <label>Описание</label>-->
+<!--            <input class="form-control" placeholder="Цена" th:field="*{description}" type="text">-->
+<!--        </div>-->
+<!--        <div class="row form-group">-->
+<!--            <label>Email</label>-->
+<!--            <input class="form-control" placeholder="Цена" th:field="*{email}" type="text">-->
+<!--        </div>-->
+<!--        <div class="row form-group">-->
+<!--            <label>телефон</label>-->
+<!--            <input class="form-control" placeholder="Цена" th:field="*{phone}" type="text">-->
+<!--        </div>-->
+<!--        <div th:each="role, stat :${roles}" class="form-check">-->
+
+<!--            <input-->
+<!--                    th:field="*{roles}"-->
+<!--                    th:value="${role.id}"-->
+<!--                    th:id="${role.name}"-->
+<!--                    type="checkbox"-->
+<!--                    class="form-check-input"/>-->
+<!--            <label-->
+<!--                    class="form-check-label"-->
+<!--                    th:text="${role.name}"-->
+<!--                    th:for="${role.name}"-->
+<!--            ></label>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <button class="btn btn-primary btn-block" type="submit">Сохранить</button>-->
+<!--    </div>-->
+
+<!--</form>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+
+<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/bootadmin.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{https://bootadmin.net/css/datatables.min.css}">-->
+
+<!--    <title>Users table</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="content p-4">-->
+<!--<div class="card mb-4">-->
+<!--    <div class="card-header bg-white font-weight-bold">-->
+<!--        Add a new user-->
+<!--    </div>-->
+<!--    <div class="card-body">-->
+<!--        <form method="post" th:action="@{/admin/users/add}" th:object="${user}" >-->
+
+<!--            <div class="form-group">-->
+<!--                <label for="exampleInputEmail1">Email address</label>-->
+<!--                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">-->
+<!--                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="exampleInputPassword1">Password</label>-->
+<!--                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
+<!--            </div>-->
+<!--            <div class="form-group form-check mb-0">-->
+<!--                <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--                <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    <div class="card-footer bg-white">-->
+<!--        <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>-->
+<!--<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.bundle.min.js}"></script>-->
+<!--<script th:src="@{/js/bootadmin.min.js}"></script>-->
+<!--<script th:src="@{https://bootadmin.net/js/datatables.min.js}"></script>-->
+
+<!--<script src="https://bootadmin.net/js/jquery.min.js"></script>-->
+<!--<script src="https://bootadmin.net/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="https://bootadmin.net/js/datatables.min.js"></script>-->
+<!--<script src="https://bootadmin.net/js/moment.min.js"></script>-->
+<!--<script src="https://bootadmin.net/js/fullcalendar.min.js"></script>-->
+<!--<script src="https://bootadmin.net/js/bootadmin.min.js"></script>-->
+
+<!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118868344-1"></script>-->
+<!--<script>-->
+<!--    window.dataLayer = window.dataLayer || [];-->
+<!--    function gtag(){dataLayer.push(arguments);}-->
+<!--    gtag('js', new Date());-->
+
+<!--    gtag('config', 'UA-118868344-1');-->
+<!--</script>-->
+
+<!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<!--<script>-->
+<!--    (adsbygoogle = window.adsbygoogle || []).push({-->
+<!--        google_ad_client: "ca-pub-4097235499795154",-->
+<!--        enable_page_level_ads: true-->
+<!--    });-->
+<!--</script>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

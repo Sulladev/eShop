@@ -1,6 +1,10 @@
 package ru.pirozhkov.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,17 +18,22 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+
     @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "enabled")
     private boolean enabled;
 
+
     @Column(name = "password")
     private String password;
 
+    @NotEmpty
+    @Size(min=3, max=20, message="Title must have 3-20 characters")
     @Column(name = "name")
     private String name;
+
 
     @Column(name = "email")
     private String email;

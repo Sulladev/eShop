@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{https://bootadmin.net/css/datatables.min.css}">
 
     <title>Users table</title>
-    </head>
+</head>
 <body>
 
 <div class="content p-4">
@@ -22,36 +22,43 @@
     <br>
     <br>
 
-<div class="card mb-4">
-    <div class="card-body">
-        <table id="example" class="table table-hover" cellspacing="0" width="100%">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Role</th>
-                <th>Password</th>
-                <th class="actions">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+    <div class="card mb-4">
+        <div class="card-body">
+            <table id="example" class="table table-hover" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Password</th>
+                    <th class="actions">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            <tr th:each="u : ${users}">
-                <td th:text="${u.name}"/>
-                <td th:text="${u.username}"/>
-                <td th:text="${u.roles}"/>
-                <td th:text="${u.password}"/>
-                <td>
-                    <a href="#" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
-                    <a href="#" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>
-                </td>
+                <tr th:each="u : ${users}">
+                    <td th:text="${u.id}"/>
+                    <td th:text="${u.name}"/>
+                    <td th:text="${u.username}"/>
+                    <td th:text="${u.roles}"/>4
+                    <td th:text="${u.password}"/>
+                    <td>
+                        <a th:href="@{'/users/edit/' + ${u.id}}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i
+                                class="fa fa-fw fa-edit"></i></a>
+                        <a th:href="@{'/users/delete/' + ${u.id}}" class="btn btn-icon btn-pill btn-danger"
+                           data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>
+                    </td>
 
-            </tr>
-            </tbody>
-        </table>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
     </div>
-
-</div>
+    <br>
+    <div><a th:href="@{/}"><i class="fas fa-home fa-fw"></i> Home</a></div>
 </div>
 </div>
 
@@ -70,7 +77,11 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118868344-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
 
     gtag('config', 'UA-118868344-1');

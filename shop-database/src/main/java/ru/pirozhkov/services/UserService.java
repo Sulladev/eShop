@@ -7,6 +7,7 @@ import ru.pirozhkov.entities.User;
 import ru.pirozhkov.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("userService")
 public class UserService {
@@ -32,7 +33,7 @@ public class UserService {
 
 
     @Transactional
-    public void save(User user) {
+    public void addUser(User user) {
         userRepository.save(user);
     }
 
@@ -40,6 +41,15 @@ public class UserService {
     @Transactional
     public void delete(User user) {
         userRepository.delete(user);
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
 
