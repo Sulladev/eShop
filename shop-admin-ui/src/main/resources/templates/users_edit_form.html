@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootadmin.min.css}">
+    <link rel="stylesheet" th:href="@{https://bootadmin.net/css/datatables.min.css}">
+
+    <title>User edit form</title>
+
+</head>
+<body>
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <header class="card-header">
+                    <h4 class="card-title mt-2"><span>Edit user</span></h4>
+                </header>
+                <article class="card-body">
+                    <!--/*@thymesVar id="user" type="ru.pirozhkov.entities.User"*/-->
+                    <form th:action="@{/users/edit}" th:object="${user}" method="POST">
+                        <input th:field="*{id}" type="hidden" class="form-control">
+                            <div class="form">
+                                <div class="row form-group">
+                                    <label>Name</label>
+                                    <input class="form-control" placeholder="Name" th:field="*{name}" type="text">
+                                </div>
+                                <div class="row form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" placeholder="Username" th:field="*{username}" type="text">
+                                </div>
+                                <div class="row form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" placeholder="Email" th:field="*{email}" type="text">
+                                </div>
+                                <div class="row form-group">
+                                    <label>Password</label>
+                                    <input class="form-control" placeholder="Password" th:field="*{password}" type="text">
+                                </div>
+
+                                <div th:each="role, stat :${roles}" class="form-check">
+                                    <input
+                                            th:field="*{roles}"
+                                            th:value="${role.id}"
+                                            th:id="${role.name}"
+                                            type="checkbox"
+                                            class="form-check-input"/>
+                                    <label
+                                            class="form-check-label"
+                                            th:text="${role.name}"
+                                            th:for="${role.name}"
+                                    ></label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block" type="submit">Save</button>
+                            </div>
+
+                    </form>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/bootadmin.min.js}"></script>
+<script th:src="@{https://bootadmin.net/js/datatables.min.js}"></script>
+
+</body>
+</html>
